@@ -1,34 +1,42 @@
-import type { PluginOptions as GatsbyDefaultPluginOptions, IPluginRefOptions } from "gatsby"
+import type {
+  PluginOptions as GatsbyDefaultPluginOptions,
+  IPluginRefOptions,
+} from "gatsby";
+import { NODE_TYPES } from "./constants";
 
+export type NodeBuilderInput =
+  | { type: typeof NODE_TYPES.Author; data: IAuthorInput }
+  | { type: typeof NODE_TYPES.Post; data: IPostInput };
 export interface IAuthorInput {
-  id: number
-  name: string
+  id: number;
+  name: string;
 }
 
 export interface IPostImageInput {
-  url: string
-  alt: string
-  width: number
-  height: number
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 export interface IPostInput {
-  id: number
-  slug: string
-  title: string
-  image: IPostImageInput
-  author: string
+  id: number;
+  slug: string;
+  title: string;
+  image: IPostImageInput;
+  author: string;
 }
 
 interface IPluginOptionsKeys {
-  // TODO: Set your plugin options here
-  [key: string]: any
+  endpoint: string;
 }
 
 /**
  * Gatsby expects the plugin options to be of type "PluginOptions" for gatsby-node APIs (e.g. sourceNodes)
  */
-export interface IPluginOptionsInternal extends IPluginOptionsKeys, GatsbyDefaultPluginOptions {}
+export interface IPluginOptionsInternal
+  extends IPluginOptionsKeys,
+    GatsbyDefaultPluginOptions {}
 
 /**
  * These are the public TypeScript types for consumption in gatsby-config
